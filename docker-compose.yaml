@@ -1,0 +1,29 @@
+version: "3"
+services:
+  broker:
+    image: eclipse-mosquitto
+    #volumes:
+    #  - "./mosquitto:/mosquitto"
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    networks: 
+      - default
+  node-red:
+    depends_on:
+      - broker
+    image: nodered/node-red
+    #volumes:
+    #  - "./node-red:/data"
+    #user: "0"
+    ports:
+      - "1880:1880"
+      - "1999:1999"
+      - "2000:2000"
+    networks: 
+      - default
+networks:
+  default:
+    
+
+
