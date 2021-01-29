@@ -131,4 +131,4 @@ dmypy.json
 
 # Docker
 
-.DS_Store/
+.DS_Store
