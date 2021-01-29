@@ -4,17 +4,25 @@ services:
     image: eclipse-mosquitto
     #volumes:
     #  - "./mosquitto:/mosquitto"
-    ports:
-      - "1883:1883"
-      - "9001:9001"
     networks: 
       - default
+    restart: on-failure
+
+  database:
+    depends_on: 
+      - broker
+    image: influxdb:latest
+    volumes: 
+      - influxdb:/var/lib/influxdb 
+    restart: on-failure
+
   node-red:
     depends_on:
+      - database
       - broker
-    image: nodered/node-red
-    #volumes:
-    #  - "./node-red:/data"
+    build: ./nodered
+    volumes:
+      - nodered:/data 
     #user: "0"
     ports:
       - "1880:1880"
@@ -22,8 +30,14 @@ services:
       - "2000:2000"
     networks: 
       - default
+    restart: on-failure
+
 networks:
   default:
+
+volumes:
+  nodered:
+  influxdb:
     
 
 
