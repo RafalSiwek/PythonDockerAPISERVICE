@@ -128,7 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-.influxdb/data/
+influxdb/data/
 
 # Docker
 .DS_Store
