@@ -1,7 +1,9 @@
 version: "3"
 services:
   broker:
-    image: eclipse-mosquitto
+    build: ./broker/
+    volumes: 
+      - broker:/var/lib
     networks: 
       - default
     restart: on-failure
@@ -44,6 +46,7 @@ networks:
 volumes:
   nodered:
   influxdb:
+  broker:
     
 
 
